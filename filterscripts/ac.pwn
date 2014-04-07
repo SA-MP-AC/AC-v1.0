@@ -63,6 +63,15 @@ forward AC_CheckFly(playerid);
 forward AC_CheckCar(playerid);
 forward AC_CheckPortal(playerid);
 
+stock SetPlayerPosEx(playerid, Float:x, Float:y, Float:z)
+{
+    SetPVarInt(playerid, "teleport", 1);
+    PlayerInfo[playerid][pOldPos][0] = x;
+    PlayerInfo[playerid][pOldPos][1] = y;
+    PlayerInfo[playerid][pOldPos][2] = z;
+    SetPlayerPos(playerid, x, y, z);
+}
+
 public OnFilterScriptInit()
 {
 	SetTimer("AntiCheat", 2500, 1);
@@ -244,4 +253,3 @@ stock GetPlayerSpeed(playerid)
     GetPlayerVelocity(playerid, Pos[0], Pos[1], Pos[2]);
     VS = floatsqroot(Pos[0]*Pos[0] + Pos[1]*Pos[1] + Pos[2]*Pos[2])*136.6666;
     return floatround(VS,floatround_round);
-}
