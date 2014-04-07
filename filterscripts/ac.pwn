@@ -31,8 +31,22 @@
 #define CHEAT_AMMOHACK		9
 #define CHEAT_SPEEDHACK		10
 
+//redefinicje funkcji
+#define SetPlayerPos(%0,%1,%2,%3) SPP(%0,%1,%2,%3)
+
+native SPP2(playerid, Float:x, Float:y, Float:z) = SetPlayerPos;
+
+stock SPP(playerid, Float:x, Float:y, Float:z)
+{
+	SetPVarInt(playerid, "teleport", 1);
+    PlayerInfo[playerid][pOldPos][0] = x;
+    PlayerInfo[playerid][pOldPos][1] = y;
+    PlayerInfo[playerid][pOldPos][2] = z;
+    SPP2(playerid, x, y, z);
+}
 
 
+//enumy
 enum ePlayers {
 	Float:pPos[3],
     Float:pOldPos[3],
@@ -68,14 +82,6 @@ forward AC_CheckFly(playerid);
 forward AC_CheckCar(playerid);
 forward AC_CheckPortal(playerid);
 
-stock SetPlayerPosEx(playerid, Float:x, Float:y, Float:z)
-{
-    SetPVarInt(playerid, "teleport", 1);
-    PlayerInfo[playerid][pOldPos][0] = x;
-    PlayerInfo[playerid][pOldPos][1] = y;
-    PlayerInfo[playerid][pOldPos][2] = z;
-    SetPlayerPos(playerid, x, y, z);
-}
 
 public OnFilterScriptInit()
 {
