@@ -15,6 +15,9 @@
 		Speedhack
 */
 #define MAX_CARS 	2000
+#if defined MAX_PLAYERS
+#undef MAX_PLAYERS
+#endif
 #define MAX_PLAYERS	500
 
 #define CHEAT_TELEPORT		1
@@ -28,8 +31,7 @@
 #define CHEAT_AMMOHACK		9
 #define CHEAT_SPEEDHACK		10
 
-new CarInfo[MAX_CARS][eCars];
-new PlayerInfo[MAX_PLAYERS][ePlayers];
+
 
 enum ePlayers {
 	Float:pPos[3],
@@ -47,6 +49,9 @@ enum eCars {
 	Float:ac_POS[2],
     ac_Warns
 };
+
+new CarInfo[MAX_CARS][eCars];
+new PlayerInfo[MAX_PLAYERS][ePlayers];
 
 //ANTI CHEAT
 forward AntiCheat();
